@@ -1,5 +1,6 @@
 package dgrfps.pfmc.mixin;
 
+import dgrfps.pfmc.Main;
 import dgrfps.pfmc.items.ItemRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -15,10 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AnimalEntity.class)
 public abstract class PoopMixin extends PassiveEntity {
 
-    int poop_ticks = random.nextInt(20 * 60 * 5) + (20 * 60);
+    int poop_ticks;
 
     protected PoopMixin(EntityType<? extends PassiveEntity> entityType, World world) {
+
         super(entityType, world);
+        this.poop_ticks = random.nextInt(20 * 60 * 5) + (20 * 60);
     }
 
     @Inject(method = "tickMovement()V", at = @At("TAIL"))
@@ -28,10 +31,9 @@ public abstract class PoopMixin extends PassiveEntity {
         if(this.poop_ticks <= 0)
         {
             this.poop_ticks = random.nextInt(20 * 60 * 5) + (20 * 60);
-            this.dropStack(ItemRegistry.POOP.getDefaultStack());
+            for (int i = 0; i < random.nextBetween(0, 5); i++)
+                this.dropStack(ItemRegistry.POOP.getDefaultStack());
             this.getWorld().addParticle(ParticleTypes.CRIT, this.getPos().x, this.getPos().y, this.getPos().z, 0, -.1, 0);
         }
     }
-
-
 }
