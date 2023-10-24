@@ -23,7 +23,7 @@ public class PoopItem extends Item {
             if (user.canConsume(this.getFoodComponent().isAlwaysEdible())) {
                 user.setCurrentHand(hand);
                 user.playSound(SoundEvents.ENTITY_VILLAGER_NO, 1f, 1f);
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 40));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 60));
                 return TypedActionResult.consume(itemStack);
             }
             return TypedActionResult.fail(itemStack);
