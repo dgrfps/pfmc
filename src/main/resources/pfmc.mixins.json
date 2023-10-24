@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "dgrfps.pfmc.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+      "PoopMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
